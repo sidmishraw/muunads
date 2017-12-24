@@ -65,9 +65,9 @@ public static void perform(IO<Void>... actions) {
 
 // somewhere inside main()
 perform(putStrLn("Hello"), 
-		putStrLn("World!"), 
-		putStrLn("I'm Sid"),
-         putStrLn("Trying to make Munnadic Java real!"));
+	putStrLn("World!"), 
+	putStrLn("I'm Sid"),
+	putStrLn("Trying to make Munnadic Java real!"));
 ```
 
 In Haskell this would be as simple as:
