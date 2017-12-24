@@ -8,6 +8,8 @@
  */
 package example;
 
+import java.util.Arrays;
+
 import actions.io.IO;
 
 /**
@@ -17,6 +19,33 @@ import actions.io.IO;
  *
  */
 public class SimpleDriver {
+    
+    /**
+     * Returns an IO action that prints the string onto STDOUT.
+     * 
+     * @param str
+     *            the string to be printed to STDOUT.
+     * @return the IO action.
+     */
+    public static IO<Void> putStrLn(String str) {
+        return new IO<Void>(() -> {
+            System.out.println(str);
+            return null;
+        });
+    }
+    
+    /**
+     * Performs the IO<Void> actions sequentially.
+     * 
+     * @param actions
+     *            the IO<Void> actions to perform
+     */
+    @SafeVarargs
+    public static void perform(IO<Void>... actions) {
+        Arrays.asList(actions).forEach(act -> {
+            act.perform();
+        });
+    }
     
     /**
      * @param args
@@ -59,6 +88,9 @@ public class SimpleDriver {
         })).perform();
         
         System.out.println("res = " + res);
+        
+        perform(putStrLn("Hello"), putStrLn("World!"), putStrLn("I'm Sid"),
+                putStrLn("Trying to make Munnadic Java real!"));
     }
     
 }
