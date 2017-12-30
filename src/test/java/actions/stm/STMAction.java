@@ -56,7 +56,7 @@ public class STMAction<A> implements Monad<A> {
      * @see muunads.Monad#bind(java.util.function.Function)
      */
     @Override
-    public <C extends Monad<B>, B> C bind(Function<A, C> fromAToMonadOfB) {
+    public <B extends Monad<C>, C> B bind(Function<A, B> fromAToMonadOfB) {
         A actionResult = this.perform();
         return fromAToMonadOfB.apply(actionResult);
     }
