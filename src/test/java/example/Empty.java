@@ -44,9 +44,10 @@ public class Empty<T> extends Maybe<T> {
      * 
      * @see muunads.Monad#wrap(java.lang.Object)
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Monad<T> wrap(T a) {
-        return getInstance(a);
+    public <M extends Monad<T>> M wrap(T a) {
+        return (M) getInstance(a);
     }
     
     /*

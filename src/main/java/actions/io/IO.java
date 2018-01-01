@@ -44,9 +44,10 @@ public class IO<A> implements Monad<A> {
      * 
      * @see muunads.Monad#wrap(java.lang.Object)
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Monad<A> wrap(A a) {
-        return new IO<>(() -> a); // wrap the a in a supplier to simulate a delayed action
+    public <M extends Monad<A>> M wrap(A a) {
+        return (M) new IO<A>(() -> a); // wrap the a in a supplier to simulate a delayed action
     }
     
     /*

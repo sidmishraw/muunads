@@ -36,7 +36,7 @@ public interface Monad<A> {
      *            the object of type A
      * @return the Monad<A> or container/context containing {@code a}
      */
-    public Monad<A> wrap(A a);
+    public <M extends Monad<A>> M wrap(A a);
     
     /**
      * Binds or shoves a Monad {@code M a} into the function {@code (f: a -> M b)} to produce a new Monad {@code (M b)}.

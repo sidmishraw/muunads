@@ -44,9 +44,10 @@ public class STMAction<A> implements Monad<A> {
      * 
      * @see muunads.Monad#wrap(java.lang.Object)
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Monad<A> wrap(A a) {
-        return new STMAction<>(() -> a); // delayed action returns `a`
+    public <M extends Monad<A>> M wrap(A a) {
+        return (M) new STMAction<>(() -> a); // delayed action returns `a`
     }
     
     /*
