@@ -25,7 +25,7 @@ import muunads.Monad;
 public class IO<A> implements Monad<A> {
     
     /**
-     * The action performed when the IO action is performed, basically the IO action.
+     * Useful for read actions, useful for IO actions that take no input and produce some output.
      */
     private Supplier<A> action;
     
@@ -40,17 +40,6 @@ public class IO<A> implements Monad<A> {
     }
     
     /*
-     * Wraps `a` in an IO action, which when performed gives back a.
-     * 
-     * @see muunads.Monad#wrap(java.lang.Object)
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public <M extends Monad<A>> M wrap(A a) {
-        return (M) new IO<A>(() -> a); // wrap the a in a supplier to simulate a delayed action
-    }
-    
-    /*
      * Performs the IO action, then shoves the result of the action to the function provided (bound).
      * 
      * @see muunads.Monad#bind(java.util.function.Function)
@@ -62,12 +51,15 @@ public class IO<A> implements Monad<A> {
         return fromAToMonadOfB.apply(actionResult);
     }
     
-    /**
-     * Performs the IO action to return the result of the action.
+    /*
+     * <p>Performs the IO action to return the result of the action.</p>
+     * 
+     * @see muunads.Monad#unwrap()
      * 
      * @return the result of the IO action.
      */
-    public A perform() {
+    @Override
+    public A unwrap() {
         return this.action.get();
     }
 }

@@ -39,18 +39,6 @@ public class STMAction<A> implements Monad<A> {
     }
     
     /*
-     * Wraps `a` in a Supplier (function) delaying the action. Gives back a new STMAction, which when performed returns
-     * `a`.
-     * 
-     * @see muunads.Monad#wrap(java.lang.Object)
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public <M extends Monad<A>> M wrap(A a) {
-        return (M) new STMAction<>(() -> a); // delayed action returns `a`
-    }
-    
-    /*
      * First executes the current STMAction, the result is then shoved into the function `fromAToMonadOfB` and the
      * resulting Monad is returned.
      * 
@@ -58,16 +46,19 @@ public class STMAction<A> implements Monad<A> {
      */
     @Override
     public <B extends Monad<C>, C> B bind(Function<A, B> fromAToMonadOfB) {
-        A actionResult = this.perform();
+        A actionResult = this.action.get();
         return fromAToMonadOfB.apply(actionResult);
     }
     
-    /**
-     * Performs the STMAction and returns any result of the action.
+    /*
+     * <p>Performs the STMAction and returns any result of the action.</p>
      * 
-     * @return the result obtained after performing the STMAction.
+     * @see muunads.Monad#unwrap()
+     * 
+     * @return The result obtained after performing the STMAction.
      */
-    public A perform() {
+    @Override
+    public A unwrap() {
         return this.action.get();
     }
 }

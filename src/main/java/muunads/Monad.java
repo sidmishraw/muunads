@@ -11,7 +11,14 @@ package muunads;
 import java.util.function.Function;
 
 /**
+ * <p>
  * A Monad of type T.
+ * </p>
+ * 
+ * <p>
+ * Unlike in Haskell, I think there is no need for a `return` function in the Monad typeclass.
+ * Only {@link Monad#bind(Function)} is enough.
+ * </p>
  * 
  * @author sidmishraw
  *
@@ -19,24 +26,6 @@ import java.util.function.Function;
  *
  */
 public interface Monad<A> {
-    
-    /**
-     * Similar to Haskell's {@code return} function. It takes something of type A and wraps it into a Monad<A>.
-     * 
-     * <p>
-     * In Haskell, it is defined as:
-     * 
-     * <p>
-     * {@code return :: a -> M a}
-     * 
-     * <p>
-     * {@code return a = M a }
-     * 
-     * @param a
-     *            the object of type A
-     * @return the Monad<A> or container/context containing {@code a}
-     */
-    public <M extends Monad<A>> M wrap(A a);
     
     /**
      * Binds or shoves a Monad {@code M a} into the function {@code (f: a -> M b)} to produce a new Monad {@code (M b)}.
@@ -50,8 +39,17 @@ public interface Monad<A> {
      * Similar to Haskell's {@code (>>=) :: M a -> (a -> M b) -> M b}
      * 
      * @param fromAToMonadOfB
-     *            a function that takes something of type A and returns a Monad of type B, f :: a -> M b
-     * @return the result, Monad of type B, Monad<B>
+     *            A function that takes something of type A and returns a Monad of type B, f :: a -> M b
+     * @return The result, Monad of type B, Monad<B>
      */
     public <C extends Monad<B>, B> C bind(Function<A, C> fromAToMonadOfB);
+    
+    /**
+     * <p>
+     * Unwraps the Monad and returns the contents of the Monad.
+     * </p>
+     * 
+     * @return The contents of the Monad.
+     */
+    public A unwrap();
 }

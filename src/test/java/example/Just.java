@@ -36,17 +36,17 @@ public class Just<A> extends Maybe<A> {
         this.a = a;
     }
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see muunads.Monad#wrap(java.lang.Object)
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public <M extends Monad<A>> M wrap(A a) {
-        return (M) new Just<>(a);
-    }
-    
+    // /*
+    // * (non-Javadoc)
+    // *
+    // * @see muunads.Monad#wrap(java.lang.Object)
+    // */
+    // @SuppressWarnings("unchecked")
+    // @Override
+    // public <M extends Monad<A>> M wrap(A a) {
+    // return (M) new Just<>(a);
+    // }
+    //
     /*
      * (non-Javadoc)
      * 
@@ -55,5 +55,16 @@ public class Just<A> extends Maybe<A> {
     @Override
     public <B extends Monad<C>, C> B bind(Function<A, B> fromAToMonadOfB) {
         return fromAToMonadOfB.apply(this.a);
+    }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see muunads.Monad#unwrap()
+     */
+    @Override
+    public A unwrap() {
+        // TODO Auto-generated method stub
+        return this.a;
     }
 }

@@ -39,16 +39,16 @@ public class Empty<T> extends Maybe<T> {
         return (Maybe<T>) empty;
     }
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see muunads.Monad#wrap(java.lang.Object)
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public <M extends Monad<T>> M wrap(T a) {
-        return (M) getInstance(a);
-    }
+    // /*
+    // * (non-Javadoc)
+    // *
+    // * @see muunads.Monad#wrap(java.lang.Object)
+    // */
+    // @SuppressWarnings("unchecked")
+    // @Override
+    // public <M extends Monad<T>> M wrap(T a) {
+    // return (M) getInstance(a);
+    // }
     
     /*
      * (non-Javadoc)
@@ -59,5 +59,16 @@ public class Empty<T> extends Maybe<T> {
     @Override
     public <B extends Monad<C>, C> B bind(Function<T, B> fromAToMonadOfB) {
         return (B) this;
+    }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see muunads.Monad#unwrap()
+     */
+    @Override
+    public T unwrap() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

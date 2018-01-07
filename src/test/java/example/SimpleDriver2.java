@@ -8,8 +8,6 @@
  */
 package example;
 
-import maybe.Maybe;
-
 /**
  * @author sidmishraw
  *
@@ -22,11 +20,11 @@ public class SimpleDriver2 {
      * @param args
      */
     public static void main(String[] args) {
-        Maybe<Integer> i = Maybe.Nothing.getInstance();
-        Maybe<Character> c = Maybe.Nothing.getInstance();
-        System.out.println(i);
-        System.out.println(c);
-        System.out.println(Maybe.Nothing.getInstance().wrap('a'));
+        // Maybe<Integer> i = Maybe.Nothing.getInstance();
+        // Maybe<Character> c = Maybe.Nothing.getInstance();
+        // System.out.println(i);
+        // System.out.println(c);
+        // System.out.println(Maybe.Nothing.getInstance().wrap('a'));
     }
     
 }

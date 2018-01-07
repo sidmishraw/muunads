@@ -43,7 +43,7 @@ public class SimpleDriver {
     @SafeVarargs
     public static void perform(IO<Void>... actions) {
         Arrays.asList(actions).forEach(act -> {
-            act.perform();
+            act.unwrap();
         });
     }
     
@@ -80,12 +80,12 @@ public class SimpleDriver {
         
         System.out.println("IO action = " + ioAction);
         System.out.println("Performing IO action...");
-        ioAction.perform();
+        ioAction.unwrap();
         
         int res = ioAction.bind((v) -> new IO<Integer>(() -> {
             System.out.println("Performing IO returning an int");
             return 5;
-        })).perform();
+        })).unwrap();
         
         System.out.println("res = " + res);
         
