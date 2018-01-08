@@ -12,7 +12,7 @@ import muunads.Monad;
 
 /**
  * Similar to Haskell's Maybe a monad.
- * Maybe a = Empty | Just a
+ * {@code Maybe a = Empty | Just a}
  * 
  * @author sidmishraw
  *

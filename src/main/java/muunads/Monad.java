@@ -39,8 +39,8 @@ public interface Monad<A> {
      * Similar to Haskell's {@code (>>=) :: M a -> (a -> M b) -> M b}
      * 
      * @param fromAToMonadOfB
-     *            A function that takes something of type A and returns a Monad of type B, f :: a -> M b
-     * @return The result, Monad of type B, Monad<B>
+     *            A function that takes something of type A and returns a Monad of type B, {@code f :: a -> M b}
+     * @return The result, Monad of type B, {@code Monad<B>}
      */
     public <C extends Monad<B>, B> C bind(Function<A, C> fromAToMonadOfB);
     

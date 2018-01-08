@@ -22,14 +22,14 @@ import muunads.Monad;
 public class Nothing<T> extends Maybe<T> {
     
     /**
-     * To make Nothing<T> singleton.
+     * To make {@code Nothing<T>} singleton.
      */
     private static Nothing<?> singleton = null;
     
     /**
      * Nothing. Symbolizes the nothing value.
      * 
-     * @return Nothing<T>
+     * @return {@code Nothing<T>} instance.
      */
     @SuppressWarnings("unchecked")
     public static <T> Nothing<T> getInstance() {

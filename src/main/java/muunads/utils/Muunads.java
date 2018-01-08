@@ -32,51 +32,50 @@ public class Muunads {
     
     /**
      * <p>
-     * Haskell like <code>do</code> block. The following Haskell snippet exhibits the usage of the <code>do</code>
+     * Haskell like {@code do} block. The following Haskell snippet exhibits the usage of the {@code do}
      * block.
      * </p>
-     * <code>
+     * {@code 
      *      main = do
      *          putStrLn "Hello"
      *          putStrLn "World"
-     * </code>
+     * }
      * 
      * <p>
-     * The <code>do</code> block is syntactic sugar for the bind operation.
+     * The {@code do} block is syntactic sugar for the bind operation.
      * </p>
-     * <code>
+     * {@code 
      *      main = putStrLn "Hello" >>=  (putStrLn "World")
-     * </code>
+     * }
      * 
      * <p>
      * Or for a more complicated example.
      * </p>
-     * <code>
+     * {@code 
      *      -- using the `do` block
      *      main = do
      *          val <- readLn -- reads a line from the stdio, the value is unboxed and assigned to `val`.
      *          putStrLn val  -- displays the value of `val` to the stdio(console).
-     * </code>
-     * <code>
+     * }
+     * {@code 
      *      -- using >>= operator
      *      main = readLn >>= (\a -> putStrLn a)
-     * </code>
+     * }
      * 
      * <p>
      * What I intend to achieve is something like:
      * </p>
-     * <code>
+     * {@code 
      * IO<String> readLn = new IO<String>(() -> {
-     *  String input = null;
-     *  try(BufferReader br = new BufferReader(new InputStringReader(System.in)) {
-     *      input = br.readLine();
-     *  } catch(Exception e) {
-     *      e.printStackTrace();
-     *  }
-     *  return input; 
+     *      String input = null;
+     *      try(BufferReader br = new BufferReader(new InputStringReader(System.in)) {
+     *           input = br.readLine();
+     * } catch(Exception e) {
+     * e.printStackTrace();
+     * }
+     * return input;
      * });
-     * 
-     * </code>
+     * }
      */
     
     /**
@@ -95,22 +94,20 @@ public class Muunads {
     /**
      * <p>
      * This action when performed, reads a line from the System.in or standard input stream.
+     * </p>
+     * 
      * <blockquote>Defaults to console.</blockquote>
-     * </p>
      * 
      * <p>
-     * Based on Haskell's <code>readLn :: Read a => IO a</code> function.
+     * Based on Haskell's {@code readLn :: Read a => IO a} function. Usage:
      * </p>
      * 
-     * <p>
-     * Usage:
-     * <code>
-     * <br />
-     *         // will peform the read action and store the String in `x`.
-     *  <br />
-     *         String x = readLn.unwrap();
-     * </code>
-     * </p>
+     * <pre>
+     * {@code
+     *     // will peform the read action and store the String in `x`.
+     *     // String x = readLn.unwrap();
+     * }
+     * </pre>
      */
     public static final IO<String> readLn = new IO<String>(() -> {
         String input = null;
@@ -138,20 +135,19 @@ public class Muunads {
      * </p>
      * 
      * <p>
-     * Based on Haskell's <code>putStrLn :: String -> IO ()</code>. Here, {@code ()} or {@code Unit} is replaced by
+     * Based on Haskell's {@code putStrLn :: String -> IO ()}. Here, {@code ()} or {@code Unit} is replaced by
      * {@linkplain Void}.
      * </p>
      * 
-     * <p>
+     * <pre>
      * Usage:
-     * <code>
-     * <br />
-     *      // will put the input/applied string on the STDOUT.
-     * <br />
-     *      putStrLn.apply("Hello world!").unwrap();
-     * <br />
-     * </code>
-     * </p>
+     * 
+     * {@code 
+     *    // will put the input/applied string on the STDOUT.
+     *    putStrLn.apply("Hello world!").unwrap();
+     * }
+     * 
+     * </pre>
      */
     public static final Function<String, IO<Void>> putStrLn = (String str) -> new IO<Void>(() -> {
         System.out.println(str);
